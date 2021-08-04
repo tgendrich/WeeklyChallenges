@@ -7,6 +7,33 @@ namespace ChallengesWithTestsMark8
     {
         public bool CollectionContainsWord(IEnumerable<string> words, string word, bool ignoreCase)
         {
+            // lot of if statements- should see if we can get it down to just a few, maybe longer if conditionals?
+            
+            
+            if (words == null)
+                return false;
+            
+            if(ignoreCase==true)
+            {
+                foreach(var item in words)
+                {
+                    if (item == null)
+                        return false;
+                    else if (item.ToLower().Contains(word.ToLower()))
+                        return true;
+                }                    
+
+            }
+            
+            foreach (var item in words)
+            {
+                if (item == null)
+                    return false;
+                else if (item.Contains(word))
+                    return true;
+
+            }
+            return false;
             throw new NotImplementedException();
         }
 
@@ -67,12 +94,48 @@ namespace ChallengesWithTestsMark8
 
         public int MaxConsecutiveCount(int[] numbers)
         {
+            int compareCount = 1;
+            int count = 1;
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                compareCount = 1;
+                for (int j = i + 1; j < numbers.Length; j++)
+                {
+                    if (numbers[i] == numbers[j])
+                    {
+                        compareCount++;
+                    }
+                    else
+                     break;
+                }
+                if(compareCount > count)
+                {
+                    count = compareCount;
+                }
+            }
+            return count;
             throw new NotImplementedException();
+            
         }
 
         public double[] GetEveryNthElement(List<double> elements, int n)
         {
-            throw new NotImplementedException();
+            double[] emptyarray = new double[0];
+            if (n < 0 || elements==null)
+                return emptyarray;
+
+
+            List<double> returnerList = new List<double>();
+            for (int i = 0; i < elements.Count; i++)
+            {
+                if (elements[i] % n == 0)
+                {
+                    returnerList.Add(elements[i]);
+                }
+
+            }
+
+            return returnerList.ToArray();
         }
     }
 }
