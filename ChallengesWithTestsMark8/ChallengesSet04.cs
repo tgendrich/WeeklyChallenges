@@ -67,10 +67,20 @@ namespace ChallengesWithTestsMark8
 
         public bool IsStringANumber(string input)
         {
-            if (input == null  ||  input.Any(char.IsLetter) || input.Any(x => !char.IsDigit(x)))
+            var blacklist = "*#@!$%^&*+=".ToCharArray();
+            if (input == null || input.Length == 0 || input.Any(char.IsLetter))
                 return false;
-            else if (input.Contains('*') || input.Contains('#'))
-                return false;
+
+            foreach (var item in blacklist)
+            {
+                if (input.Contains(item))
+                    return false;
+                    
+            }
+            if (input.Any(char.IsDigit))
+                return true;
+            
+           
 
             
             throw new NotImplementedException();
